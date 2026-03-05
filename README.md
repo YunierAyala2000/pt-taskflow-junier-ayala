@@ -65,11 +65,29 @@ A continuación se describen los componentes utilizados y su propósito dentro d
 [Input](https://ui.shadcn.com/docs/components/radix/input): para obtener los textos de los ingresados por el usuario en la App.
 
 [Checkbox](https://ui.shadcn.com/docs/components/radix/checkbox): para gestionar el cambio de estado de las tareas, permitiendo marcar o desmarcar elementos completados.
+
 [Button](https://ui.shadcn.com/docs/components/radix/button): para ejecutar acciones o eventos dentro de la interfaz, como guardar, eliminar o confirmar operaciones.
+
 [Badge](https://ui.shadcn.com/docs/components/radix/badge): para resaltar iconos o textos.
+
 [Dialog](https://ui.shadcn.com/docs/components/radix/dialog): para mostrar ventanas emergentes modales que mejoran la interacción del usuario tanto en dispositivos de escritorio como en móviles.
+
 [Drawer](https://ui.shadcn.com/docs/components/radix/drawer): para usarlo cuando se detecte que esta en un dispositivo movil.
+
 [Sonner](https://ui.shadcn.com/docs/components/radix/sonner): Para alertas o mensajes del sistema que informan al usuario sobre el resultado de una acción.
+
 [Pagination](https://ui.shadcn.com/docs/components/radix/pagination)
 
 [Select](https://ui.shadcn.com/docs/components/radix/select)
+
+### Hook: use-media-query
+
+Este hook se utiliza dentro de la aplicación para:
+
+- Detectar si el usuario está utilizando un dispositivo móvil o escritorio.
+
+- Cambiar dinámicamente componentes de la interfaz ( Drawer en móvil y Dialog en escritorio).
+
+- Mejorar la experiencia de usuario en interfaces responsivas.
+
+- Unificar lógica de media queries y evitar repetir código en múltiples componentes.
