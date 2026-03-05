@@ -10,6 +10,7 @@ import { Loader } from "@/components/shared/loader";
 import { AppPagination } from "@/components/shared/AppPagination";
 import { useTasks } from "@/hooks/use-task";
 import { TaskItem } from "@/components/task-item";
+import { AddTaskDrawer } from "@/components/modal-add-task";
 
 export default function Home() {
   const {
@@ -23,6 +24,7 @@ export default function Home() {
     error,
     toggleTodo,
     removeTodo,
+    addTodo,
     page,
     setPage,
     totalPages,
@@ -30,6 +32,8 @@ export default function Home() {
     itemsPerPage,
     setItemsPerPage,
   } = useTasks();
+
+  const [showAddDrawer, setShowAddDrawer] = useState(false);
 
   const stats = {
     all: todos.length,
@@ -86,7 +90,7 @@ export default function Home() {
                     variant="primary"
                     size="lg"
                     title="Agregar nueva Tarea"
-                    onClick={() => alert("hola")}
+                    onClick={() => setShowAddDrawer(true)}
                   >
                     <PlusCircle className="size-4" />
                   </Button>
@@ -132,6 +136,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <AddTaskDrawer
+          open={showAddDrawer}
+          onOpenChange={() => setShowAddDrawer(false)}
+          triggerText="Nueva Tarea"
+          direction="bottom"
+          addTodo={addTodo}
+        />
       </div>
     </>
   );
