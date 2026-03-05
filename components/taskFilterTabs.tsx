@@ -20,8 +20,14 @@ const filters: { value: TaskFilter; label: string }[] = [
   { value: "pending", label: "Pendientes" },
 ];
 
-export function TaskFilterTabs({ filter, onChange, counts }: TaskFilterTabsProps) {
-  const [activeIndex, setActiveIndex] = useState(() => filters.findIndex((f) => f.value === filter));
+export function TaskFilterTabs({
+  filter,
+  onChange,
+  counts,
+}: TaskFilterTabsProps) {
+  const [activeIndex, setActiveIndex] = useState(() =>
+    filters.findIndex((f) => f.value === filter),
+  );
 
   const handleChange = (value: TaskFilter, index: number) => {
     setActiveIndex(index);
@@ -49,11 +55,22 @@ export function TaskFilterTabs({ filter, onChange, counts }: TaskFilterTabsProps
             )}
             aria-pressed={isActive}
           >
-            <span>{f.label}</span>
             <span
               className={cn(
                 "tabular-nums text-xs",
-                isActive ? "dark:text-gray-100" : "text-gray-400 dark:text-gray-500",
+                isActive
+                  ? "dark:text-gray-800"
+                  : "text-gray-400 dark:text-gray-500",
+              )}
+            >
+              {f.label}
+            </span>
+            <span
+              className={cn(
+                "tabular-nums text-xs",
+                isActive
+                  ? "dark:text-gray-800"
+                  : "text-gray-400 dark:text-gray-500",
               )}
             >
               {count}
