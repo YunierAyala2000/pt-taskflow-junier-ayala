@@ -47,3 +47,27 @@ con este comando se formatean todos los archivos
 ```bash
 pnpm lint
 ```
+
+#### LIBRERIA USADA PARA FRONTEND shadcn/ui
+
+Elegi esta libreria por que [https://ui.shadcn.com/](SNADCD/UI) está diseñada específicamente para Tailwind. Por lo que facilita su uso e integracion.
+Tambien por que es la cual no es cerrada y no se instala como una dependencia me baja una copia de los componentes y lo puedo modificar
+sin restriccion algun por lo cual me parece ideal por que ya tiene funcionalidades y diseños muy utiles y es muy personalizable.
+
+### COMPONENTES DESCARGADOS DE LA LIBRERIA SNADCD/UI
+
+Para el desarrollo de la aplicación se seleccionaron diferentes componentes de la librería shadcn/ui, teniendo en cuenta criterios como adaptabilidad a múltiples dispositivos, facilidad de uso, accesibilidad y consistencia visual dentro de la interfaz.
+
+A continuación se describen los componentes utilizados y su propósito dentro de la aplicación:
+
+[https://ui.shadcn.com/docs/components/radix/alert-dialog](Alert Dialog): para mostrar confirmaciones antes de ejecutar acciones importantes, como eliminar o modificar elementos dentro de la aplicación.
+[https://ui.shadcn.com/docs/components/radix/input](Input): para obtener los textos de los ingresados por el usuario en la App
+[https://ui.shadcn.com/docs/components/radix/checkbox](Checkbox): para para gestionar el cambio de estado de las tareas, permitiendo marcar o desmarcar elementos completados.
+[https://ui.shadcn.com/docs/components/radix/button](Button): para ejecutar acciones o eventos dentro de la interfaz, como guardar, eliminar o confirmar operaciones.
+[https://ui.shadcn.com/docs/components/radix/badge](Badge): para resaltar iconos o textos.
+[https://ui.shadcn.com/docs/components/radix/dialog](Dialog): para mostrar ventanas emergentes modales que mejoran la interacción del usuario tanto en dispositivos de escritorio como en móviles.
+[https://ui.shadcn.com/docs/components/radix/drawer](Drawer): para usarlo cuando se detecte que esta en un dispotivo movil.
+[https://ui.shadcn.com/docs/components/radix/sonner](Sonner): Para lertas o mensajes del sistema que informan al usuario sobre el resultado de una acción.
+[https://ui.shadcn.com/docs/components/radix/pagination](Pagination)
+
+[https://ui.shadcn.com/docs/components/radix/select](Select)
