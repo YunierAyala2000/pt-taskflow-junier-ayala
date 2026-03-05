@@ -12,6 +12,7 @@ import { useTasks } from "@/hooks/use-task";
 import { TaskItem } from "@/components/task-item";
 import { AddTaskDrawer } from "@/components/modal-add-task";
 import { PwaInstallButton } from "@/components/shared/PwaInstallButton";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 
 export default function Home() {
   const {
@@ -87,14 +88,17 @@ export default function Home() {
                     counts={countsFiltered}
                   />
 
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    title="Agregar nueva Tarea"
-                    onClick={() => setShowAddDrawer(true)}
-                  >
-                    <PlusCircle className="size-4" />
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <ThemeToggle />
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      title="Agregar nueva Tarea"
+                      onClick={() => setShowAddDrawer(true)}
+                    >
+                      <PlusCircle className="size-4" />
+                    </Button>
+                  </div>
                 </div>
 
                 <TaskItem
