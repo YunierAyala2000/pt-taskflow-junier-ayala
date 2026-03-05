@@ -1,20 +1,29 @@
 "use client";
 
-import { useTasks } from "@/hooks/use-task";
-import { Loader } from "@/components/shared/loader";
-import { Button } from "@/components/ui/button";
-import { TaskStats } from "@/components/task-stats";
-import { PlusCircle } from "lucide-react";
-import { AppPagination } from "@/components/shared/AppPagination";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { PlusCircle } from "lucide-react";
+
+import { TaskStats } from "@/components/task-stats";
+import { TaskFilterTabs } from "@/components/taskFilterTabs";
+import { Loader } from "@/components/shared/loader";
+import { AppPagination } from "@/components/shared/AppPagination";
+import { useTasks } from "@/hooks/use-task";
 
 export default function Home() {
-  const { todos, allTodos, isLoading, mutating, retry } = useTasks();
+  const { todos, allTodos, filter, setFilter, isLoading, mutating, retry } =
+    useTasks();
 
   const stats = {
     all: todos.length,
     completed: todos.filter((t) => t.completed).length,
     pending: todos.filter((t) => !t.completed).length,
+  };
+
+  const countsFiltered = {
+    all: allTodos.length,
+    completed: allTodos.filter((t) => t.completed).length,
+    pending: allTodos.filter((t) => !t.completed).length,
   };
 
   if (isLoading) {
@@ -50,6 +59,20 @@ export default function Home() {
                   <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100">
                     Mis Tareas
                   </h2>
+                  <TaskFilterTabs
+                    filter={filter}
+                    onChange={setFilter}
+                    counts={countsFiltered}
+                  />
+
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    title="Agregar nueva Tarea"
+                    onClick={() => alert("hola")}
+                  >
+                    <PlusCircle className="size-4" />
+                  </Button>
                 </div>
               </div>
             </div>
