@@ -39,7 +39,10 @@ pnpm build
 pnpm start
 ```
 
-### Linter
+### Formateadores Linter y Prettier
+
+Estos se definieron para que todo el codigo tanga la misma estructura.
+con este comando se formatean todos los archivos
 
 ```bash
 pnpm lint
