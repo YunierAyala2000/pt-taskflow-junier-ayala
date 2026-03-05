@@ -113,11 +113,11 @@ export default function Home() {
                   }}
                   onDelete={removeTodo}
                   emptyMessage="No hay tareas en tu lista"
-                  maxHeight="420px"
+                  maxHeight="60vh"
                   showStatusBadge={true}
                 />
 
-                <div className="flex items-center justify-end mt-8 md:mt-6 pt-4 border-t border-gray-200 dark:border-gray-800">
+                <div className="flex items-center justify-end mt-2 md:mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
                   <AppPagination
                     page={page}
                     totalPages={totalPages}
