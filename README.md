@@ -124,6 +124,19 @@ Este hook se utiliza dentro de la aplicación para:
 
 - Unificar lógica de media queries y evitar repetir código en múltiples componentes.
 
+### use-task:
+
+Es el núcleo de la lógica de tareas. Centraliza todo el estado, las peticiones a la API y las operaciones CRUD.
+
+Expone todo lo necesario para que los componentes puedan listar, añadir, editar y eliminar tareas sin preocuparse por la lógica interna.
+
+Responsabilidades:
+
+- Gestiona el estado de paginación, filtros y lista local de tareas.
+- Usa **SWR** para obtener tareas de la API con caché automático.
+- Mantiene un registro de tareas creadas localmente (que la API no persiste) usando un `Set` de IDs en un `ref`.
+- Expone las funciones `addTodo`, `toggleTodo` y `removeTodo` para que los componentes las consuman directamente.
+
 ##
 
 ## Uso de SWR en el proyecto Para las Petciones y gestion de cache
@@ -134,3 +147,34 @@ Y es ideal para apps pequeñas gestion de cache y mas.
 
 En caso de que el proyecto fuera mas grande lo ideal seria usar TanStack Query ya que este permite mutaciones de estado
 mas avanzadas y un mejor manejo de cache
+
+---
+
+## Archivos relacionados a `use-task.ts`
+
+### `services/task-services.ts`
+
+Contiene todas las funciones que se comunican con la API externa (`dummyjson.com/todos`). Está marcado con `"use server"` para que Next.js lo ejecute en el servidor, evitando exponer la URL base al cliente.
+
+Funciones que expone:
+
+| Función                          | Método HTTP | Descripción                      |
+| -------------------------------- | ----------- | -------------------------------- |
+| `getTasksPaginated(limit, skip)` | GET         | Obtiene tareas paginadas         |
+| `addTask(payload)`               | POST        | Crea una nueva tarea             |
+| `updateTask(id, payload)`        | PUT         | Actualiza el estado de una tarea |
+| `removeTask(id)`                 | DELETE      | Elimina una tarea por ID         |
+
+Internamente usa una función genérica `serverRequest<T>` que centraliza el manejo de errores y los headers comunes.
+
+### `types/task-types.ts`
+
+Define todos los tipos e interfaces TypeScript usados a lo largo del flujo de tareas. Garantiza consistencia entre la API, los servicios y los componentes.
+
+| Tipo / Interfaz | Descripción                                                                                 |
+| --------------- | ------------------------------------------------------------------------------------------- |
+| `Task`          | Representa una tarea completa. Incluye `isLocal` para identificar tareas creadas en cliente |
+| `AddTask`       | Payload para crear una tarea (sin `id`)                                                     |
+| `UpdateTask`    | Payload para actualizar solo el campo `completed`                                           |
+| `TaskResponse`  | Respuesta paginada de la API: `todos`, `total`, `skip`, `limit`                             |
+| `TaskFilter`    | Union type: `"all"` \| `"completed"` \| `"pending"`                                         |
