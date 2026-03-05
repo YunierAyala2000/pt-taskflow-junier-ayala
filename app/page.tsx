@@ -59,15 +59,15 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      <div className="flex flex-col min-h-screen lg:items-center lg:justify-center bg-zinc-50 font-sans dark:bg-black">
         {mutating && (
           <div>
             <Loader text="Procesando..." />
           </div>
         )}
 
-        <div className="w-full max-w-6xl mx-auto p-4">
-          <div className="block lg:hidden mb-6">
+        <div className="flex flex-col flex-1 lg:flex-none w-full max-w-6xl mx-auto lg:p-4">
+          <div className="block lg:hidden lg:mb-4 px-4">
             <TaskStats
               total={stats.all}
               completed={stats.completed}
@@ -75,9 +75,9 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-col lg:grid lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2 order-2 lg:order-1">
-              <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-4 md:p-6">
+          <div className="flex flex-col flex-1 lg:grid lg:grid-cols-3 lg:gap-6">
+            <div className="flex flex-col flex-1 lg:col-span-2 order-2 lg:order-1">
+              <div className="flex flex-col flex-1 bg-white dark:bg-gray-900 lg:rounded-2xl lg:shadow-sm lg:border lg:border-gray-200 lg:dark:border-gray-800 p-4 md:p-6">
                 <div className="flex items-center justify-between mb-3 md:mb-4 gap-2">
                   <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100">
                     Mis Tareas
