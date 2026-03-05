@@ -78,7 +78,7 @@ export default function Home() {
           <div className="flex flex-col lg:grid lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 order-2 lg:order-1">
               <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-4 md:p-6">
-                <div className="flex items-center justify-between mb-4 md:mb-6 gap-2">
+                <div className="flex items-center justify-between mb-3 md:mb-4 gap-2">
                   <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100">
                     Mis Tareas
                   </h2>
@@ -113,7 +113,7 @@ export default function Home() {
                   }}
                   onDelete={removeTodo}
                   emptyMessage="No hay tareas en tu lista"
-                  maxHeight="450px"
+                  maxHeight="420px"
                   showStatusBadge={true}
                 />
 
