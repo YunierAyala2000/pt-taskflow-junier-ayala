@@ -80,7 +80,9 @@ A continuación se describen los componentes utilizados y su propósito dentro d
 
 [Select](https://ui.shadcn.com/docs/components/radix/select)
 
-### Hook: use-media-query
+## HOOKS
+
+### use-media-query:
 
 Este hook se utiliza dentro de la aplicación para:
 
@@ -91,3 +93,11 @@ Este hook se utiliza dentro de la aplicación para:
 - Mejorar la experiencia de usuario en interfaces responsivas.
 
 - Unificar lógica de media queries y evitar repetir código en múltiples componentes.
+
+##
+
+## Uso de SWR en el proyecto Para las Petciones
+
+En este proyecto se utiliza SWR como librería principal para la obtención y gestión de datos provenientes de la API.
+Ya que este creado Vercel y esta muy optimizado para proyectos con Next.
+Y es ideal para apps pequeñas
