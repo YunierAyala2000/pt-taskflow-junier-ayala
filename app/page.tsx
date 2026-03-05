@@ -23,6 +23,12 @@ export default function Home() {
     error,
     toggleTodo,
     removeTodo,
+    page,
+    setPage,
+    totalPages,
+    totalItems,
+    itemsPerPage,
+    setItemsPerPage,
   } = useTasks();
 
   const stats = {
@@ -100,6 +106,20 @@ export default function Home() {
                   maxHeight="450px"
                   showStatusBadge={true}
                 />
+
+                <div className="flex items-center justify-end mt-8 md:mt-6 pt-4 border-t border-gray-200 dark:border-gray-800">
+                  <AppPagination
+                    page={page}
+                    totalPages={totalPages}
+                    totalItems={totalItems}
+                    onPageChange={setPage}
+                    itemsPerPage={itemsPerPage}
+                    onItemsPerPageChange={setItemsPerPage}
+                    itemsPerPageOptions={[10, 20, 30, 40, 50]}
+                    showItemsPerPage={true}
+                    showPageInfo={true}
+                  />
+                </div>
               </div>
             </div>
 
