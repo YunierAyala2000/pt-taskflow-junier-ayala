@@ -48,6 +48,36 @@ con este comando se formatean todos los archivos
 pnpm lint
 ```
 
+## Estructura del proyecto
+
+```
+pt-taskflow-junier-ayala/
+├── app/                        # App Router de Next.js
+│   ├── globals.css             # Estilos globales con Tailwind
+│   ├── layout.tsx              # Layout raíz de la aplicación
+│   └── page.tsx                # Página principal
+│
+├── components/
+│   └── ui/                     # Componentes de shadcn/ui personalizados
+│       ├── alert-dialog.tsx
+├──
+│
+├── hooks/                      # Hooks personalizados de React
+│   ├── use-media-query.ts      # Detecta el tipo de dispositivo (móvil/escritorio)
+│   └── use-task.ts             # Lógica principal de tareas con SWR
+│
+├── services/                   # Servicios de lógica de negocio
+│   └── task-services.ts        # Llamadas a la API de tareas
+│
+├── types/                      # Tipos e interfaces TypeScript
+│   └── task-types.ts           # Tipos para Task, TaskFilter, etc.
+│
+├── lib/                        # Utilidades compartidas
+│   └── utils.ts                # Función cn() para clases condicionales
+│
+└── public/                     # Archivos estáticos (SVGs, imágenes)
+```
+
 #### LIBRERIA USADA PARA FRONTEND shadcn/ui
 
 Elegi esta libreria por que [shadcn/ui](https://ui.shadcn.com/) está diseñada específicamente para Tailwind. Por lo que facilita su uso e integracion.
@@ -96,8 +126,11 @@ Este hook se utiliza dentro de la aplicación para:
 
 ##
 
-## Uso de SWR en el proyecto Para las Petciones
+## Uso de SWR en el proyecto Para las Petciones y gestion de cache
 
 En este proyecto se utiliza SWR como librería principal para la obtención y gestión de datos provenientes de la API.
 Ya que este creado Vercel y esta muy optimizado para proyectos con Next.
-Y es ideal para apps pequeñas
+Y es ideal para apps pequeñas gestion de cache y mas.
+
+En caso de que el proyecto fuera mas grande lo ideal seria usar TanStack Query ya que este permite mutaciones de estado
+mas avanzadas y un mejor manejo de cache
