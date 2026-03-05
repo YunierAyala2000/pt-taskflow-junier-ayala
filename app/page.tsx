@@ -9,10 +9,21 @@ import { TaskFilterTabs } from "@/components/taskFilterTabs";
 import { Loader } from "@/components/shared/loader";
 import { AppPagination } from "@/components/shared/AppPagination";
 import { useTasks } from "@/hooks/use-task";
+import { TaskItem } from "@/components/task-item";
 
 export default function Home() {
-  const { todos, allTodos, filter, setFilter, isLoading, mutating, retry } =
-    useTasks();
+  const {
+    todos,
+    allTodos,
+    filter,
+    setFilter,
+    isLoading,
+    mutating,
+    retry,
+    error,
+    toggleTodo,
+    removeTodo,
+  } = useTasks();
 
   const stats = {
     all: todos.length,
@@ -74,8 +85,24 @@ export default function Home() {
                     <PlusCircle className="size-4" />
                   </Button>
                 </div>
+
+                <TaskItem
+                  todos={todos}
+                  isLoading={isLoading}
+                  isMutating={mutating}
+                  error={error}
+                  onRetry={retry}
+                  onToggle={(id, completed) => {
+                    toggleTodo(id, completed);
+                  }}
+                  onDelete={removeTodo}
+                  emptyMessage="No hay tareas en tu lista"
+                  maxHeight="450px"
+                  showStatusBadge={true}
+                />
               </div>
             </div>
+
             <div className="hidden lg:block lg:col-span-1 order-1 lg:order-2">
               <TaskStats
                 total={stats.all}
