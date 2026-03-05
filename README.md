@@ -181,6 +181,18 @@ mas avanzadas y un mejor manejo de cache
 
 ---
 
+## 🖼️ Screenshots
+
+### 🖥️ Escritorio
+
+![PC](public/PC.png)
+
+### 📱 Móvil
+
+![Móvil 1](public/movil1.png)
+
+![Móvil 2](public/mobil2.png)
+
 ## ✨ Características extra
 
 La aplicación incluye varias funcionalidades adicionales que mejoran la experiencia de uso y el rendimiento:

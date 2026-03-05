@@ -11,6 +11,7 @@ import { AppPagination } from "@/components/shared/AppPagination";
 import { useTasks } from "@/hooks/use-task";
 import { TaskItem } from "@/components/task-item";
 import { AddTaskDrawer } from "@/components/modal-add-task";
+import { PwaInstallButton } from "@/components/shared/PwaInstallButton";
 
 export default function Home() {
   const {
@@ -144,6 +145,8 @@ export default function Home() {
           direction="bottom"
           addTodo={addTodo}
         />
+
+        <PwaInstallButton />
       </div>
     </>
   );
