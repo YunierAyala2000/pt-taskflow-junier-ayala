@@ -1,22 +1,24 @@
 # TaskFlow
 
-Aplicación de gestión de tareas construida con **Next.js 16**, **React 19** y **Tailwind CSS 4**.
+Aplicación de gestión de tareas construida con **Next.js 16**, **React 19**, **Tailwind CSS 4** y **Next-Pwa**.
+
+Funciona como una PWA, permitiendo instalarla y usarla fácilmente en computadores, tablets y dispositivos móviles. 🚀
 
 ## Requisitos previos
 
 - [Node.js](https://nodejs.org/) v18 o superior
 - [pnpm](https://pnpm.io/) instalado globalmente
 
-## Instalación
+## ⚡Instalación y ejecución
 
-Clona el repositorio e instala las dependencias:
+Clona el repositorio:
 
 ```bash
 git clone <https://github.com/YunierAyala2000/pt-taskflow-junier-ayala.git>
 cd pt-taskflow-junier-ayala
 ```
 
-## Correr el proyecto
+## ⚡Ejecución
 
 ### Modo desarrollo
 
@@ -48,7 +50,7 @@ con este comando se formatean todos los archivos
 pnpm lint
 ```
 
-## Estructura del proyecto
+## 📂 Estructura del proyecto
 
 ```
 pt-taskflow-junier-ayala/
@@ -139,17 +141,6 @@ Responsabilidades:
 
 ##
 
-## Uso de SWR en el proyecto Para las Petciones y gestion de cache
-
-En este proyecto se utiliza SWR como librería principal para la obtención y gestión de datos provenientes de la API.
-Ya que este creado Vercel y esta muy optimizado para proyectos con Next.
-Y es ideal para apps pequeñas gestion de cache y mas.
-
-En caso de que el proyecto fuera mas grande lo ideal seria usar TanStack Query ya que este permite mutaciones de estado
-mas avanzadas y un mejor manejo de cache
-
----
-
 ## Archivos relacionados a `use-task.ts`
 
 ### `services/task-services.ts`
@@ -178,3 +169,27 @@ Define todos los tipos e interfaces TypeScript usados a lo largo del flujo de ta
 | `UpdateTask`    | Payload para actualizar solo el campo `completed`                                           |
 | `TaskResponse`  | Respuesta paginada de la API: `todos`, `total`, `skip`, `limit`                             |
 | `TaskFilter`    | Union type: `"all"` \| `"completed"` \| `"pending"`                                         |
+
+## Uso de SWR en el proyecto Para las Petciones y gestion de cache
+
+En este proyecto se utiliza SWR como librería principal para la obtención y gestión de datos provenientes de la API.
+Ya que este creado Vercel y esta muy optimizado para proyectos con Next.
+Y es ideal para apps pequeñas gestion de cache y mas.
+
+En caso de que el proyecto fuera mas grande lo ideal seria usar TanStack Query ya que este permite mutaciones de estado
+mas avanzadas y un mejor manejo de cache
+
+---
+
+## ✨ Características extra
+
+La aplicación incluye varias funcionalidades adicionales que mejoran la experiencia de uso y el rendimiento:
+
+- 📄 Paginado de tareas
+  Permite navegar fácilmente entre grandes cantidades de tareas sin afectar el rendimiento de la aplicación.
+
+- 📱 Multiplataforma (PWA)
+  La aplicación funciona como Progressive Web App, lo que permite instalarla y utilizarla en computadores, tablets y dispositivos móviles.
+
+- 📊 Barra de estadísticas de tareas
+  Visualización rápida del estado de las tareas para conocer de forma clara el progreso y organización del trabajo.

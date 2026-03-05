@@ -70,7 +70,6 @@ export function useTasks(initialItemsPerPage: number = DEFAULT_ITEMS_PER_PAGE) {
 
   const addTodo = useCallback(async (taskTitle: string) => {
     try {
-      debugger;
       const newTask: AddTask = { todo: taskTitle.trim(), completed: false, userId: 1 };
       const newTaskData = await addTask(newTask);
 
