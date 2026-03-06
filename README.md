@@ -234,5 +234,6 @@ La aplicación incluye varias funcionalidades adicionales que mejoran la experie
 - 📊 Barra de estadísticas de tareas
   Visualización rápida del estado de las tareas para conocer de forma clara el progreso y organización del trabajo.
 
-- ✨ Cambio de temas
-  La app cuenta con un modo claro y oscuro
+- ✨ Cambio de temas La app cuenta con un modo claro y oscuro
+
+- ➤ Boton de contacto via whatsApp

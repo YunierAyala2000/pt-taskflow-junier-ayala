@@ -13,6 +13,7 @@ import { TaskItem } from "@/components/task-item";
 import { AddTaskDrawer } from "@/components/modal-add-task";
 import { PwaInstallButton } from "@/components/shared/PwaInstallButton";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
+import { FloatButtonSendWhatsapp } from "@/components/shared/FloatButtomSendWhatsapp";
 
 export default function Home() {
   const {
@@ -152,6 +153,7 @@ export default function Home() {
         />
 
         <PwaInstallButton />
+        <FloatButtonSendWhatsapp />
       </div>
     </>
   );
