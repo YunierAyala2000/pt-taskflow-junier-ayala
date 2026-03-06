@@ -221,6 +221,140 @@ mas avanzadas y un mejor manejo de cache
 
 ---
 
+## 🗂️ Manejo de estado
+
+En este proyecto se utilizó una combinación de **estado local y estado del servidor**, sin usar librerías de estado global como Redux o Zustand, ya que para el tamaño de la aplicación no es necesario.
+
+### `useState` — Estado local de UI
+
+Se usa para manejar:
+
+- La página actual (`page`)
+- El filtro activo (`filter`: todas / completadas / pendientes)
+- La lista local de tareas (`localTodos`)
+- El indicador de carga de mutaciones (`mutating`)
+- El número de ítems por página (`itemsPerPage`)
+
+**¿Por qué?** Es la herramienta nativa de React para estado simple y de corta duración. No necesita configuración adicional y es suficiente para los datos de UI de esta aplicación.
+
+### `useRef` — Referencias mutables sin re-render
+
+Se usa para:
+
+- `localTaskIds`: un `Set<number>` que rastrea IDs de tareas creadas localmente para no llamar a la API al editarlas o eliminarlas.
+- `idTask`: contador para generar IDs únicos a tareas locales.
+
+**¿Por qué?** Los `ref` no generan re-renders al mutar, lo que los hace ideales para datos de control interno que no deben afectar la UI directamente.
+
+### `SWR` — Estado del servidor (Server State)
+
+Se usa para obtener las tareas paginadas desde la API (`dummyjson.com/todos`). Gestiona automáticamente:
+
+- Caché de respuestas por clave (`swrKey`)
+- Estado de carga (`isLoading`)
+- Estado de error (`error`)
+- Revalidación con `mutate()`
+
+**¿Por qué SWR y no TanStack Query?** Para una aplicación de esta escala, SWR es más ligero y simple. Está creado por Vercel y está optimizado para Next.js. TanStack Query sería más adecuado en proyectos con mutaciones complejas, invalidaciones en cascada o múltiples fuentes de datos.
+
+### `next-themes` — Estado del tema
+
+Gestiona el tema claro/oscuro de la aplicación con persistencia en `localStorage` y soporte para la preferencia del sistema operativo.
+
+**¿Por qué?** Integración nativa con Next.js App Router, sin necesidad de implementación manual con cookies o localStorage.
+
+---
+
+## 🔧 Métodos del hook `useTasks` y su uso en componentes
+
+El hook `useTasks` centraliza toda la lógica de tareas y expone tres métodos principales para mutar el estado. Los componentes los reciben como **props de tipo función (callbacks)**, lo que los mantiene desacoplados del hook y los hace reutilizables.
+
+### `addTodo(taskTitle: string): Promise<Task>`
+
+Crea una nueva tarea con el título recibido. Internamente llama a la API (`POST /todos/add`) y guarda el resultado como tarea local con un ID generado en cliente, ya que la API de `dummyjson` no persiste los datos.
+
+```ts
+const { addTodo } = useTasks();
+await addTodo("Hacer ejercicio");
+```
+
+### `toggleTodo(id: number, completed: boolean): Promise<void>`
+
+Cambia el estado de completado de una tarea. Si la tarea es local (creada en sesión), la actualiza solo en el estado sin llamar a la API. Si es del servidor, llama a `PUT /todos/:id`.
+
+```ts
+const { toggleTodo } = useTasks();
+await toggleTodo(5, true); // marca como completada
+```
+
+### `removeTodo(id: number): Promise<void>`
+
+Elimina una tarea. Si es local, la quita del estado directamente. Si es del servidor, llama a `DELETE /todos/:id`. Si al eliminar la página queda vacía y no es la primera, retrocede una página automáticamente.
+
+```ts
+const { removeTodo } = useTasks();
+await removeTodo(5);
+```
+
+---
+
+## 🧩 Diseño de los componentes que consumen estos métodos
+
+### `task-item.tsx` — Lista de tareas
+
+Recibe `onToggle`, `onDelete` como props de callback en lugar de usar el hook directamente. Esto lo hace **reutilizable en cualquier contexto** sin acoplarse al estado global.
+
+```tsx
+<TaskItem
+  todos={todos}
+  onToggle={(id, completed) => toggleTodo(id, completed)}
+  onDelete={removeTodo}
+/>
+```
+
+Motivo del diseño:
+
+- Al recibir callbacks, el componente no sabe de dónde vienen los datos ni cómo se gestionan.
+- Usa un `ConfirmDialog` intermedio antes de ejecutar `onDelete`, para evitar eliminaciones accidentales.
+- El prop `isMutating` bloquea la UI mientras hay una operación en curso.
+
+### `modal-add-task.tsx` — Modal para agregar tareas
+
+Recibe `addTodo` directamente como prop y lo pasa al formulario interno `TaskForm`.
+
+```tsx
+<AddTaskDrawer
+  open={showAddDrawer}
+  onOpenChange={setShowAddDrawer}
+  addTodo={addTodo}
+/>
+```
+
+Motivo del diseño:
+
+- Usa `useMediaQuery` para mostrar un **`Dialog`** en escritorio y un **`Drawer`** en móvil, con el mismo formulario (`TaskForm`) en ambos casos. Esto evita duplicar la lógica del formulario.
+- El formulario maneja su propio estado de `isLoading` para mostrar un spinner durante la creación.
+- Llama a `onCancel` (que cierra el modal) solo si `addTodo` fue exitoso.
+
+### `task-stats.tsx` — Estadísticas de tareas
+
+Este componente es **puramente presentacional**: solo recibe `total`, `completed` y `pending` como números. No necesita los métodos del hook.
+
+```tsx
+<TaskStats
+  total={allTodos.length}
+  completed={allTodos.filter((t) => t.completed).length}
+  pending={allTodos.filter((t) => !t.completed).length}
+/>
+```
+
+Motivo del diseño:
+
+- Al aislar los cálculos fuera del componente, `task-stats` es independiente y testeable.
+- Usa `useMediaQuery` para decidir si mostrar las estadísticas como un **panel lateral** (escritorio) o como un **botón flotante que abre un Drawer** (móvil), que ocupa menos espacio en pantallas pequeñas.
+
+---
+
 ## ✨ Características extra
 
 La aplicación incluye varias funcionalidades adicionales que mejoran la experiencia de uso y el rendimiento:
@@ -237,3 +371,23 @@ La aplicación incluye varias funcionalidades adicionales que mejoran la experie
 - ✨ Cambio de temas La app cuenta con un modo claro y oscuro
 
 - ➤ Boton de contacto via whatsApp
+
+## Herramientas de apoyo
+
+En el desarrollo de la app me apoye de varias herramientas para mejorar tanto el diseño como la velocidad del desarrollo:
+
+- `Visual studio con GitCopilot:` Lo use para creacion de componentes y correccion de errores.
+
+- `GEMINI:` La use para generar la imagen de la app para cuando esta se instale en los dispotivos.
+
+- [V8](https://v0.app/): Para la creacion del prototipo del diseño de la app (le realice mejoras pero me dio una idea inicial)
+
+- [stitch-IA.Desig](https://v0.app/): Para la generacion de otro prototipo (La version que genero V8 no me convencio del todo esta fue la final)
+
+- [uiverse.io](https://uiverse.io/vishalmet/modern-moose-93): Para ver ideas de diseño de componentes de profesionales (de aqui saque el Loader)
+
+- [freeconvert](https://www.freeconvert.com/es/jpg-to-svg): Para convertir el icono de la app generado con gemini a formato SGV
+
+- [iloveimg](https://www.iloveimg.com/es/redimensionar-imagen): Para redimencionar la imagen de la app para que al momento instalarla el icono se vea en todos los dispositivos
+
+Entre otras pero estas fueron las principales !
