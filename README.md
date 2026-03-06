@@ -50,34 +50,74 @@ con este comando se formatean todos los archivos
 pnpm lint
 ```
 
+## 🖼️ Screenshots
+
+### 🖥️ Escritorio
+
+![PC modo claro](public/Pc-claro.png)
+![PC modo Oscuro](public/Pc-oscuro.png)
+
+### 📱 Móvil — Modo claro
+
+![Móvil claro](public/movil-claro.png)
+![Móvil claro detalle](public/movil-claro-det.png)
+
+### 📱 Móvil — Modo oscuro
+
+![Móvil oscuro](public/movil-oscuro.png)
+![Móvil oscuro detalle](public/movil-oscuro-det.png)
+
 ## 📂 Estructura del proyecto
 
 ```
 pt-taskflow-junier-ayala/
-├── app/                        # App Router de Next.js
-│   ├── globals.css             # Estilos globales con Tailwind
-│   ├── layout.tsx              # Layout raíz de la aplicación
-│   └── page.tsx                # Página principal
+├── app/                              # App Router de Next.js
+│   ├── globals.css                   # Estilos globales con Tailwind
+│   ├── layout.tsx                    # Layout raíz de la aplicación
+│   └── page.tsx                      # Página principal
 │
 ├── components/
-│   └── ui/                     # Componentes de shadcn/ui personalizados
+│   ├── modal-add-task.tsx            # Modal/Drawer para agregar tareas
+│   ├── task-item.tsx                 # Lista de tareas individuales
+│   ├── task-stats.tsx                # Barra de estadísticas de tareas
+│   ├── taskFilterTabs.tsx            # Tabs de filtro (Todas/Completadas/Pendientes)
+│   │
+│   ├── shared/                       # Componentes reutilizables globales
+│   │   ├── AppPagination.tsx         # Paginación con selector de items por página
+│   │   ├── ConfirmDialog.tsx         # Diálogo de confirmación genérico
+│   │   ├── loader.tsx                # Indicador de carga animado
+│   │   ├── PwaInstallButton.tsx      # Botón de instalación de la PWA
+│   │   ├── task-empty.tsx            # Estado vacío cuando no hay tareas
+│   │   ├── theme-provider.tsx        # Proveedor de tema claro/oscuro
+│   │   └── theme-toggle.tsx          # Botón para alternar el tema
+│   │
+│   └── ui/                           # Componentes de shadcn/ui
 │       ├── alert-dialog.tsx
-├──
+│       ├── badge.tsx
+│       ├── button.tsx
+│       ├── checkbox.tsx
+│       ├── dialog.tsx
+│       ├── drawer.tsx
+│       ├── input.tsx
+│       ├── pagination.tsx
+│       ├── select.tsx
+│       └── sonner.tsx
 │
-├── hooks/                      # Hooks personalizados de React
-│   ├── use-media-query.ts      # Detecta el tipo de dispositivo (móvil/escritorio)
-│   └── use-task.ts             # Lógica principal de tareas con SWR
+├── hooks/                            # Hooks personalizados de React
+│   ├── use-media-query.ts            # Detecta el tipo de dispositivo (móvil/escritorio)
+│   └── use-task.ts                   # Lógica principal de tareas con SWR
 │
-├── services/                   # Servicios de lógica de negocio
-│   └── task-services.ts        # Llamadas a la API de tareas
+├── services/                         # Servicios de lógica de negocio
+│   └── task-services.ts              # Llamadas a la API de tareas
 │
-├── types/                      # Tipos e interfaces TypeScript
-│   └── task-types.ts           # Tipos para Task, TaskFilter, etc.
+├── types/                            # Tipos e interfaces TypeScript
+│   └── task-types.ts                 # Tipos para Task, TaskFilter, etc.
 │
-├── lib/                        # Utilidades compartidas
-│   └── utils.ts                # Función cn() para clases condicionales
+├── lib/                              # Utilidades compartidas
+│   └── utils.ts                      # Función cn() para clases condicionales
 │
-└── public/                     # Archivos estáticos (SVGs, imágenes)
+└── public/                           # Archivos estáticos (imágenes, iconos, manifest)
+    └── manifest.json                 # Configuración de la PWA
 ```
 
 #### LIBRERIA USADA PARA FRONTEND shadcn/ui
@@ -181,18 +221,6 @@ mas avanzadas y un mejor manejo de cache
 
 ---
 
-## 🖼️ Screenshots
-
-### 🖥️ Escritorio
-
-![PC](public/PC.png)
-
-### 📱 Móvil
-
-![Móvil 1](public/movil1.png)
-
-![Móvil 2](public/mobil2.png)
-
 ## ✨ Características extra
 
 La aplicación incluye varias funcionalidades adicionales que mejoran la experiencia de uso y el rendimiento:
@@ -205,3 +233,6 @@ La aplicación incluye varias funcionalidades adicionales que mejoran la experie
 
 - 📊 Barra de estadísticas de tareas
   Visualización rápida del estado de las tareas para conocer de forma clara el progreso y organización del trabajo.
+
+- ✨ Cambio de temas
+  La app cuenta con un modo claro y oscuro
