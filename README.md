@@ -64,7 +64,7 @@ pnpm lint
 
 ### 📱 Móvil — Modo oscuro
 
-![Móvil oscuro](public/movil-oscuro.png)
+![Móvil oscuro](public/Movil-oscuro.png)
 ![Móvil oscuro detalle](public/movil-oscuro-det.png)
 
 ## 📂 Estructura del proyecto
